@@ -31,26 +31,14 @@ struct Queue {
     }
 }
 
+let input = Int(readLine()!)!
 var queue = Queue()
-let commandCount = Int(readLine()!)!
 
-for _ in 0..<commandCount {
-    let input = readLine()!.split(separator: " ")
-    
-    switch input[0] {
-    case "push":
-        queue.push(Int(input[1])!)
-    case "pop":
-        print(queue.pop())
-    case "size":
-        print(queue.size)
-    case "empty":
-        print(queue.empty ? 1 : 0)
-    case "front":
-        print(queue.front)
-    case "back":
-        print(queue.back)
-    default:
-        print("Error")
-    }
+(1...input).forEach { queue.push($0) }
+
+while queue.size != 1 {
+    queue.pop()
+    queue.push(queue.pop())
 }
+
+print(queue.pop())
